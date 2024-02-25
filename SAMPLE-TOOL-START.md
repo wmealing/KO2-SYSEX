@@ -1187,21 +1187,14 @@ F0 00 20 76 33 40 37 16 05 00 08 00 00 03 68 0E 00 00 00 00 00 73 6F 75 6E 64 08
 
 We're going to start skipping the duplicated structure.
 
-
-
-F0 00 20 76 33 40 - Explained earlier
-37 - FROM THE EP-133
-16 - Sequence Reply to Previous packet #7.
-05 - Command 5 ?
-00 08 00 00 03 68 0E 00 00 00 00 00 73 6F 75 6E 64 08 73 00 07 50 0E 00 00 00 00 00 70 72 6F 6A 65 00 63 74 73 00
-               h        s  o  u  n  d   s    P        p  r  o  j  e   c  t  s  
-
-
-
-
-F7 - End of System Exclusive (known as EOX)
-
-
+| Value | Description|
+| F0 00 20 76 33 40 | Explained earlier
+| 37 | FROM THE EP-133
+| 16 | Sequence Reply to Previous packet #7.
+| 05 | Command 5 ?
+| Rest | 00 08 00 00 03 68 0E 00 00 00 00 00 73 6F 75 6E 64 08 73 00 07 50 0E 00 00 00 00 00 70 72 6F 6A 65 00 63 74 73 00 |
+| decoded|                                   h        s  o  u  n  d   s    P        p  r  o  j  e   c  t  s  
+| F7 | End of System Exclusive (known as EOX) |
 
 This looks 'similar' to that every 8th character being a null, says the straing "sounds" and "projects"
 
