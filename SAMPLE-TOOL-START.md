@@ -1188,6 +1188,7 @@ F0 00 20 76 33 40 37 16 05 00 08 00 00 03 68 0E 00 00 00 00 00 73 6F 75 6E 64 08
 We're going to start skipping the duplicated structure.
 
 | Value | Description|
+| --- | ----------- |
 | F0 00 20 76 33 40 | Explained earlier
 | 37 | FROM THE EP-133
 | 16 | Sequence Reply to Previous packet #7.
