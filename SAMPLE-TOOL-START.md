@@ -12,6 +12,81 @@ This is an attempt to document what I have found out regarding the communication
 
 I'm using "Midi monitor" in "Spy mode", which dumps both sides of the conversation. This needed to be enabled in the I needed to reboot the mac afterwards otherwise I could only see one side of the conversation.
 
+
+## From TE javascript:
+
+The teenage engineerings "sample tool" uses javascript to manage control of the KO2.  The tool itself has minimised and obfusticated the javascript for whatever reason.
+
+Some constants in the javascript:
+
+```
+    GREET: 1,
+    ECHO: 2,
+    DFU: 3,
+    DFU_ENTER: 1,
+    DFU_ENTER_MIDI: 1,
+    DFU_EXIT: 5,
+    PRODUCT_SPECIFIC: 127,
+    STATUS_OK: 0,
+    STATUS_ERROR: 1,
+    STATUS_COMMAND_NOT_FOUND: 2,
+    STATUS_BAD_REQUEST: 3,
+    STATUS_SPECIFIC_ERROR_START: 16,
+    STATUS_SPECIFIC_ERROR_END: 63,
+    STATUS_SPECIFIC_SUCCESS_START: 64
+```
+
+And also these, which look like usable constants, some of them should not be surprising
+at all.
+
+
+```
+  , s5 = 64
+  , o5 = 32
+  , Aa = 240
+  , l5 = 247
+  , bl = 0
+  , jl = 32
+  , El = 118
+  , a5 = 64
+```
+
+Making a sysex message:
+
+```
+o[1] = 0
+o[2] = 32
+o[3] = 118
+o[4] = t
+o[5] = 64
+o[6] =  s5 | o5 | l >> 7 & 31,  <--weird
+o[7] = sequence_id & 127 (127 sequence id wrap ?)
+o[8] = r
+_p(i, o.subarray(9, 9 + s)),
+o[last] = 257 <-- F7 (EOX end message)
+
+```
+
+Bytes 9 through to the last go though some kind of '7bit ation' with this
+function.
+
+```
+function _p(e, t) {
+    let r = 1
+      , i = 0;
+    for (let s = 0; s < e.length; ++s) {
+        const o = s % 7
+          , l = e[s] >> 7;
+        t[i] |= l << o,
+        t[r++] = e[s] & 127,
+        o == 6 && s < e.length - 1 && (i += 8,
+        r++)
+    }
+}
+```
+
+I'm guessing that this is the format that the MIDI devices understand.
+
 ## How you can help:
 
 Download a a midi monitor such as Midi monitor ( https://www.snoize.com/midimonitor/ for mac) Or send sx for windows or amidi for Linux. Each of them has their own method of capturing that you should test. Ensure that you can both capture and sound.
@@ -1057,6 +1132,30 @@ F0 - Start of System Exclusive (known as SOX)
 Rest: =  "ascii string with every 8th char a null"
 product:EP-133;mode:normal;sku:TE032AS001;os_version:1.1.2;sw_version:1.1.2;bl_version:1000.0.10;serial:E3PTV2JT
 F7 = End of System Exclusive (known as EOX)
+
+This matches up to to the function "j8" in the javascript:
+
+```
+function s8(e) {
+    const t = {
+        chip_id: "",
+        mode: "",
+        os_version: "",
+        product: "",
+        serial: "",
+        sku: "",
+        sw_version: ""
+    };
+    return e.split(";").forEach(r=>{
+        const [i,s] = r.split(":");
+        i in t && (t[i] = s)
+    }
+```
+
+I think "chip_id" would be left bank here. "bl_version" also doesn't get saved in the js or used. What does "bl" stand for, bootloader ?
+
+
+
 
 
 
