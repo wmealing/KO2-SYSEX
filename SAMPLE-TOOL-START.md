@@ -1223,11 +1223,7 @@ F0 00 20 76 33 40 37 15 05 00 00 0C 00 00 02 00 F7
 | | 00 - Unknown (was 40)|
 | | 02 - Unknown (was 00)|
 | | 00 - Unknown (Same as previous packet)|
-
-
-
-
-F7 - End of System Exclusive (known as EOX)
+| F7 | End of System Exclusive (known as EOX)|
 
 ---
 
@@ -1236,30 +1232,23 @@ F7 - End of System Exclusive (known as EOX)
 F0 00 20 76 33 40 77 16 05 00 04 00 00 00 00 F7
 
 
-
-F0 - Start of System Exclusive (known as SOX)
-00 20 76 - Manufacturers id for teenage engineering 0x00 0x20 0x76 (according to the midi manufacturers id numbers.
-33 - Every message has "33"
-40 - Every message has "40"
-77 - FROM THE EP-133
-16 - new Sequence 
-
-
-
-
-Prev cmd : 05 00 00 0C 00 00 02 00
-This resp: 05 00 04 00 00 00 00
-
-
-
-
-05 - Unknown (Same as previous packet) Responding to "command 05"
-00 - Unknown (Same as previous packet) Could be Null separator ?
-04 - Unknown (previous 05 command asked for 00)
-00 - Unknown
-00 - Unknown
-00 - Unknown
-00 - Unknown
+| Code| Description |
+| --- | ----------- |
+| F0 | Start of System Exclusive (known as SOX)
+| 00 20 76 | Manufacturers id for teenage engineering 0x00 0x20 0x76 (according to the midi manufacturers id numbers.
+| 33 | Every message has "33" |
+| 40 | Every message has "40" |
+| 77 | FROM THE EP-133 |
+| 16 | new Sequence |
+| | Prev cmd : 05 00 00 0C 00 00 02 00 |
+|  | This resp: 05 00 04 00 00 00 00 |
+|  | 05 - Unknown (Same as previous packet) Responding to "command 05" |
+|  | 00 - Unknown (Same as previous packet) Could be Null separator ? |
+|  | 04 - Unknown (previous 05 command asked for 00)  |
+|  | 00 - Unknown |
+|  | 00 - Unknown |
+|  | 00 - Unknown |
+|  | 00 - Unknown |
 
 
 
@@ -1298,6 +1287,8 @@ F0 00 20 76 33 40 77 17 05 00 04 00 00 00 00 F7
 
 
 
+| Code| Description |
+| --- | ----------- |
 F0 00 20 76 33 40 - Explained earlier
 77 - TO THE EP-133.
 16 - Sequence Reply to Previous packet #15.
@@ -1321,6 +1312,8 @@ Oh no, this looks very FAMILIAR
 
 
 
+| Code| Description |
+| --- | ----------- |
 F0 00 20 76 33 40 - Explained earlier
 37 - FROM THE EP-133.
 17 - New Sequence
@@ -1347,6 +1340,8 @@ So, this response looks similar to #9, but its NOT. This has a 1. We queried for
 
 
 
+| Code| Description |
+| --- | ----------- |
 F0 00 20 76 33 40 - Explained earlier
 77 - TO THE EP-133.
 18 - New Sequence
@@ -1368,6 +1363,8 @@ F0 00 20 76 33 40 37 18 05 00 00 00 01 F7
 
 
 
+| Code| Description |
+| --- | ----------- |
 F0 00 20 76 33 40 - Explained earlier
 37 - FROM THE EP-133
 18 - Same sequence (response to packet #11 ?)
@@ -1389,6 +1386,8 @@ F0 00 20 76 33 40 77 19 05 00 04 00 01 00 00 F7
 
 
 
+| Code| Description |
+| --- | ----------- |
 F0 00 20 76 33 40 - Explained earlier
 77 - TO THE EP-133
 19 - New sequence 
@@ -1410,6 +1409,8 @@ F0 00 20 76 33 40 37 19 05 00 00 00 01 F7
 
 
 
+| Code| Description |
+| --- | ----------- |
 F0 00 20 76 33 40 - Explained earlier
 37 - FROM  THE EP-133
 19 - Response eo Packet #13.
@@ -1431,6 +1432,8 @@ F0 00 20 76 33 40 77 1A 05 08 07 02 07 50 00 00 F7
 
 
 
+| Code| Description |
+| --- | ----------- |
 F0 00 20 76 33 40 - Explained earlier
 77 - TO THE EP-133
 1A - New Sequence
