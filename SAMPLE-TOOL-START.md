@@ -1117,20 +1117,20 @@ I have deduced that this is the explanation of the packet
 ### Packet #4 (System Configuration Response) EP-133 -> HOST
 F0 00 20 76 33 40 37 14 01 00 00 70 72 6F 64 75 63 74 00 3A 45 50 2D 31 33 33 00 3B 6D 6F 64 65 3A 6E 00 6F 72 6D 61 6C 3B 73 00 6B 75 3A 54 45 30 33 00 32 41 53 30 30 31 3B 00 6F 73 5F 76 65 72 73 00 69 6F 6E 3A 31 2E 31 00 2E 32 3B 73 77 5F 76 00 65 72 73 69 6F 6E 3A 00 31 2E 31 2E 32 3B 62 00 6C 5F 76 65 72 73 69 00 6F 6E 3A 31 30 30 30 00 2E 30 2E 31 30 3B 73 00 65 72 69 61 6C 3A 45 00 33 50 54 56 32 4A 54 F7
 
-
-
-F0 - Start of System Exclusive (known as SOX)
-00 20 76 - Manufacturers id for teenage engineering as per midi manufacturers id numbers.
-33 - Every message has "33"
-40 - Every message has "40"
-37 - From the EP-133
-   14 - respond to sequence 14.
-   01 - respond to command for system configuration (from packet #0)
-00 - null padding (or continuations of previous command value)
-00 - null padding start.
-Rest: =  "ascii string with every 8th char a null"
-product:EP-133;mode:normal;sku:TE032AS001;os_version:1.1.2;sw_version:1.1.2;bl_version:1000.0.10;serial:E3PTV2JT
-F7 = End of System Exclusive (known as EOX)
+| Code| Description |
+| --- | ----------- |
+| F0  | Start of System Exclusive (known as SOX) |
+| 00 20 76 | Manufacturers id for teenage engineering as per midi manufacturers id numbers.|
+| 33  | Every message has "33" |
+| 40  | Every message has "40" |
+| 37  | From the EP-133 |
+|     |   14  respond to sequence 14 |
+|     |  01 - respond to command for system configuration (from packet #0) |
+|  00 |  null padding (or continuations of previous command value) |
+|  00 | null padding start. |
+|     |  Rest: =  "ascii string with every 8th char a null" |
+|     | product:EP-133;mode:normal;sku:TE032AS001;os_version:1.1.2;sw_version:1.1.2;bl_version:1000.0.10;serial:E3PTV2JT |
+|  F7 | End of System Exclusive (known as EOX)|
 
 This matches up to to the function "j8" in the javascript:
 
@@ -1173,28 +1173,25 @@ This packet was sent from the host TO the EP-133.
 
 F0 00 20 76 33 40 77 15 05 00 01 01 00 40 00 00 F7
 
+| Code| Description |
+| --- | ----------- |
+| F0  |  Start of System Exclusive (known as SOX) |
+| 00 20 76 | Manufacturers id for teenage engineering 0x00 0x20 0x76 (according to the midi manufacturers id numbers. | 
+| 33  | Every message has "33" |
+| 40  | Every message has "40"
+| 77  | TO the EP-133 |
+| 15  | "Next in sequence" |
+|     | 05 00 01 01 00 40 00 00| 
+|     |  05 - Unknown (Command 05 - This continues all the way to the end of the series) |
+|     |  00 - Unknown |
+|     |  01 - Unknown |
+|     |  01 - Unknown |
+|     |  00 - Unknown |
+|     |  40 - Unknown |
+|     |  00 - Unknown |
+|     |  00 - Unknown |
+|  F7 | End of System Exclusive (known as EOX)|
 
-
-F0 - Start of System Exclusive (known as SOX)
-00 20 76 - Manufacturers id for teenage engineering 0x00 0x20 0x76 (according to the midi manufacturers id numbers.
-33 - Every message has "33"
-40 - Every message has "40"
-77 - TO the EP-133
-15 - "Next in sequence"
-
-
-
-
-05 00 01 01 00 40 00 00
-   05 - Unknown (Command 05 - This continues all the way to the end of the series)
-   00 - Unknown
-   01 - Unknown
-   01 - Unknown
-   00 - Unknown
-   40 - Unknown
-   00 - Unknown
-   00 - Unknown
-F7 - End of System Exclusive (known as EOX)
 
 
 
@@ -1207,32 +1204,25 @@ These values are not a random or pointless, they must have some value, I don't k
 F0 00 20 76 33 40 37 15 05 00 00 0C 00 00 02 00 F7
 
 
-
-F0 - Start of System Exclusive (known as SOX)
-00 20 76 - Manufacturers id for teenage engineering 0x00 0x20 0x76 (according to the midi manufacturers id numbers.
-33 - Every message has "33"
-40 - Every message has "40"
-37 - FROM THE EP-133
-15 - Sequence Reply to Previous packet #15.
-
-
-
-
-
-Prev cmd : 05 00 01 01 00 40 00 00
-This resp: 05 00 00 0C 00 00 02 00
-
-
-
-
-05 - Unknown (Command 05 - This continues all the way to the end of the series) 
-00 - Unknown (Same as previous packet) Could be Null separator
-00 - Unknown (-1 from previous packet)
-0C - Unknown (previous packet was 01)  12 in decimal, 12 somethings ?, i dont have 12 projects.
-00 - Unknown (same as previous packet)
-00 - Unknown (was 40)
-02 - Unknown (was 00)
-00 - Unknown (Same as previous packet)
+| Code| Description |
+| --- | ----------- |
+| F0 | Start of System Exclusive (known as SOX) |
+| 00 20 76 | Manufacturers id for teenage engineering 0x00 0x20 0x76 (according to the midi manufacturers id numbers.|
+| 33 | Every message has "33" |
+| 40 | Every message has "40" |
+| 37 | FROM THE EP-133 |
+| 15 | Sequence Reply to Previous packet #15. |
+|  | Prev cmd : 05 00 01 01 00 40 00 00|  
+|  |This resp: 05 00 00 0C 00 00 02 00|
+|  | |
+| |05 - Unknown (Command 05 - This continues all the way to the end of the series) |
+| | 00 - Unknown (Same as previous packet) Could be Null separator |
+| | 00 - Unknown (-1 from previous packet)|
+| | 0C - Unknown (previous packet was 01)  12 in decimal, 12 somethings ?, i dont have 12 projects.|
+| | 00 - Unknown (same as previous packet)|
+| | 00 - Unknown (was 40)|
+| | 02 - Unknown (was 00)|
+| | 00 - Unknown (Same as previous packet)|
 
 
 
